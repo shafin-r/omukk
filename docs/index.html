@@ -5,34 +5,89 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400,700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css?v=1.0">
     <title>Omukk</title>
-    <style>
-        body{
-            margin: 0;
-            padding: 0;
-            background-color: black;
-            color: white;
-            font-family: 'Inter', sans-serif;
-        }
-        .container{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-        .container p{
-            margin-top: 20px;
-            font-size: 24px;
-            font-weight: 600;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
-        <img src="logo.png" alt="Omukk Logo">
-        <p>Under Construction</p>
+        <div class="row header">
+            <div class="col-md-4 offset-md-4 text-center">
+                <img src="logo-icon-text-white.svg" class="img-fluid" alt="Omukk Logo">
+            </div>
+            <div class="col-md-4 my-auto text-end">
+                contact@omukk.com
+            </div>
+        </div>
     </div>
+    <div class="container">
+        <div class="home">
+            <img src="circle.png" class="img-fluid circle"/>
+            <div class="row gx-5">
+                <div class="col-md-6 my-auto text-end">
+                    <h1>Ensuring Quality.</h1>
+                </div>
+                <div class="col-md-4">
+                    <p>We are a Bangladesh based tech solution
+                        agency ensuring lorem ipsum dolor sit amet,
+                        consectetur adipiscing elit. Nullam fermentum
+                        justo at libero mollis, eget sagittis arc
+                        bibendum. Mauris varius metus augue, quis
+                        venenatis tellus rutrum sit amet.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="services">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="item-services">
+                        <h1>Design</h1>
+                        <p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat auctor eu in elit.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item-services">
+                        <h1>Development</h1>
+                        <p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="item-services">
+                        <h1>Digital Marketing</h1>
+                        <p>This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris. Morbi accumsan ipsum velit. Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non  mauris vitae erat consequat auctor eu in elit.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contact">
+        <div class="container">
+            <div class="row text-center">
+                <p>Have a work for us? Send us an email at</p>
+                <h2>contact@omukk.com</h2>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+    <script>
+
+    $(".home").mousemove(function(e) {
+        parallaxIt(e, ".circle", -100);
+    });
+    function parallaxIt(e, target, movement) {
+        var $this = $(".home");
+        var relX = e.pageX - $this.offset().left;
+        var relY = e.pageY - $this.offset().top;
+        gsap.to(target, 1, {
+            x: (relX - $this.width() / 2) / $this.width() * movement,
+            y: (relY - $this.height() / 2) / $this.height() * movement
+        });
+    }
+    </script>
 </body>
 </html>
