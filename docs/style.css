@@ -13,6 +13,9 @@ body{
     width: 180px;
 }
 
+a, a:hover, a:focus{
+    color: white;
+}
 
 .home{
     position: relative;
@@ -69,4 +72,41 @@ body{
 
 .contact{
     margin-bottom: 60px;
+}
+.contact .socials{
+    margin-top: 20px;
+}
+.contact .socials a{
+    margin-right: 20px;
+}
+.contact .socials a svg{
+    height: 34px;
+    width: 34px;
+}
+.contact .socials a:last-child{
+    margin-right: 0;
+}
+
+@media (max-width: 767.98px) {
+    .header img{
+        margin-bottom: 20px;
+    }
+    .home h1{
+        font-size: 38px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+    .home p{
+        text-align: center;
+        font-size: 16px;
+    }
+    .services .col-md-4:first-child{
+        border-right:0;
+    }
+    .services .col-md-4:last-child{
+        border-left: 0;
+    }
+    .home .circle{
+        width: 300px;
+    }
 }
