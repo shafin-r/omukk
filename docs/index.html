@@ -25,7 +25,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400,700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css?v=1.1">
+    <link rel="stylesheet" href="style.css?v=1.2">
 </head>
 <body>
     <div class="container">
@@ -104,7 +104,7 @@
             y: (relY - $this.height() / 2) / $this.height() * movement
         });
     }
-    gsap.from(".home h1", {duration: 0.5, opacity: 0, y: 50, delay: 0.5})
+    gsap.fromTo(".home h1", {y: 50}, {y: 0, opacity: 1, duration: 0.5, delay: 0.5})
     </script>
 </body>
 </html>

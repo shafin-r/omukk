@@ -39,6 +39,7 @@ a, a:hover, a:focus{
 .home h1{
     font-size: 48px;
     font-weight: 700;
+    opacity: 0;
 }
 .home p{
     font-weight: 400;
