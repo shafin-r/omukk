@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         Inter: ["Inter", "sans-serif"],
       },
+      mixBlendMode: {
+        difference: "difference",
+      },
     },
   },
   plugins: [],
