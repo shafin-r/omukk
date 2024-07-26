@@ -16,7 +16,7 @@ const Cursor = () => {
 
   return (
     <div
-      className="fixed pointer-events-none w-8 h-8 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2 z-50"
+      className="fixed pointer-events-none w-4 h-4 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2 z-50"
       style={{ left: `${position.x}px`, top: `${position.y}px` }}
     />
   );

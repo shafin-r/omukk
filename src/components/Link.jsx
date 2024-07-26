@@ -6,7 +6,7 @@ export default function Link({ data, isActive, setSelectedIndicator }) {
 
   return (
     <motion.div
-      className="relative flex items-center"
+      className="relative flex items-center mt-3"
       onMouseEnter={() => {
         setSelectedIndicator(href);
       }}
@@ -19,11 +19,18 @@ export default function Link({ data, isActive, setSelectedIndicator }) {
       <motion.div
         variants={scale}
         animate={isActive ? "open" : "closed"}
-        className="w-[10px] h-[10px] bg-white rounded-full absolute -left-[30px]"
+        className="w-[20px] h-[20px] bg-white rounded-full absolute left-0"
       ></motion.div>
-      <a className="font-Inter tracking-tighter text-7xl" href={href}>
+      <motion.a
+        animate={isActive ? "open" : "closed"}
+        whileHover={{
+          translateX: "30px",
+        }}
+        className="font-Inter font-bold tracking-tighter text-7xl"
+        href={href}
+      >
         {title}
-      </a>
+      </motion.a>
     </motion.div>
   );
 }

@@ -4,7 +4,6 @@ import gsap from "gsap";
 
 export default function ModalComponent({ modal, works }) {
   const { active, index } = modal;
-  console.log(active);
   const modalContainer = useRef(null);
   const cursor = useRef(null);
   const cursorLabel = useRef(null);

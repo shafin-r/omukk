@@ -132,7 +132,8 @@ function App() {
 
   return (
     <ReactLenis root>
-      <div className="px-6 lg:px-32 bg-[#0B0B0B] h-full">
+      <div className="px-6 lg:px-32 bg-[#0B0B0B] h-full cursor-none">
+        <Cursor />
         <div
           className="lg:block hidden px-4 fixed  opacity-10  m-auto rounded-full w-[600px] h-[600px] bg-gradient-to-t from-[#0B0B0B] to-[#B8BBFF]"
           style={{
@@ -141,84 +142,21 @@ function App() {
             transform: "translate(-50%, -50%)",
           }}
         ></div>
-        {/* <button
-          onClick={toggleNav}
-          className="fixed top-7 right-7 lg:right-16 z-50 p-2 rounded"
-        >
-          <RiMenu4Fill size={30} className="text-white" />
-        </button> */}
-        {/* <div
-          className={`fixed top-0 right-0 w-80 lg:w-1/2 h-full bg-[#0b0d11] shadow-lg transform z-50 flex flex-col justify-evenly px-6 ${
-            isOpen ? "translate-x-0" : "translate-x-full"
-          } transition-transform duration-300 ease-in-out`}
-        >
-          <button
-            onClick={toggleNav}
-            className="absolute top-7 right-7 lg:right-16 lg:top-7 p-2"
-          >
-            <RiCloseFill size={35} className="text-white" />
-          </button>
-          <ul className="text-white list-none flex flex-col gap-7 font-Inter tracking-tighter text-5xl font-semibold w-full">
-            <li className="">
-              <a
-                onClick={toggleNav}
-                href="#"
-                className="hover:bg-white hover:text-black transition duration-300 ease-in-out w-full cursor-pointer h-16"
-              >
-                home
-              </a>
-            </li>
-            <li className="">
-              <a
-                onClick={toggleNav}
-                href="#about"
-                className="hover:bg-white hover:text-black transition duration-300 ease-in-out w-full cursor-pointer h-16"
-              >
-                about
-              </a>
-            </li>
-            <li className="">
-              <a
-                onClick={toggleNav}
-                href="#services"
-                className="hover:bg-white hover:text-black transition duration-300 ease-in-out w-full cursor-pointer h-16"
-              >
-                services
-              </a>
-            </li>
-            <li className="">
-              <a
-                onClick={toggleNav}
-                href="#works"
-                className="hover:bg-white hover:text-black transition duration-300 ease-in-out w-full cursor-pointer h-16"
-              >
-                works
-              </a>
-            </li>
-            <li>
-              <a
-                onClick={toggleNav}
-                href="#contact"
-                className="hover:bg-white hover:text-black transition duration-300 ease-in-out w-1/2 cursor-pointer h-16 "
-              >
-                contact
-              </a>
-            </li>
-          </ul>
-        </div> */}
         <div
           onClick={() => {
             setIsActive(!isActive);
           }}
-          className="fixed right-10 m-[20px] z-30 w-[80px] h-[80px] rounded-full bg-[#787879] cursor-pointer flex items-center justify-center"
+          className="fixed right-10 m-[20px] z-10 flex items-center justify-center"
         >
-          <div
-            className={`w-full before:block before:h-[1px] before:w-[40%] before:m-auto before:bg-white before:relative before:transition before:duration-300 after:block after:h-[1px] after:w-[40%] after:m-auto after:bg-white after:relative after:transition after:duration-300 after:-top-[5px] before:top-[5px] z-50 ${
-              isActive
-                ? "after:rotate-45 after:top-[2px] before:-rotate-45 before:top-[0px]"
-                : ""
-            }`}
-          ></div>
+          <div className="w-[70px] h-[70px] bg-[#525252] rounded-full cursor-pointer">
+            <div
+              className={`w-full before:block before:h-[1px] before:w-[40%] before:m-auto before:bg-white before:relative before:transition before:duration-300 after:block after:h-[1px] after:w-[40%] after:m-auto after:bg-white after:relative after:transition after:duration-300 before:top-[30px] after:top-[35px] ${
+                isActive
+                  ? "after:rotate-45 after:top-[1px] before:-rotate-45 before:top-[37px] cursor-pointer rounded-full"
+                  : ""
+              }`}
+            ></div>
+          </div>
           <AnimatePresence mode="wait">
             {isActive && <NavBar />}
           </AnimatePresence>
@@ -296,14 +234,14 @@ function App() {
             <ModalComponent modal={modal} works={works} />
           </section>
           <section
-            className="relative flex flex-col gap-16 lg:gap-24"
+            className="h-screen relative flex flex-col gap-16 lg:gap-24"
             id="contact"
           >
-            <div className="lg:h-5/6">
+            <div className="lg:h-3/4">
               <div className=" py-8 flex items-center justify-center lg:justify-start">
                 <img src="/logo-icon-white.svg" alt="" className="h-10 w-10" />
               </div>
-              <div className=" flex flex-col items-center gap-6 mt-10">
+              <div className=" flex flex-col items-center gap-6 mt-32">
                 <h1 className="font-Inter text-5xl lg:text-[7rem] text-[#D9D9D9] font-semibold tracking-tighter text-center">
                   WANT TO TALK <br /> WITH US?
                 </h1>
