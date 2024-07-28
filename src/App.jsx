@@ -1,28 +1,44 @@
+// SVG imports
 import { CgMouse } from "react-icons/cg";
-import { RiMenu4Fill } from "react-icons/ri";
-import { RiCloseFill } from "react-icons/ri";
-import { HiArrowLongRight } from "react-icons/hi2";
+import { HiArrowLongRight, HiArrowLongDown } from "react-icons/hi2";
+import { ImMap } from "react-icons/im";
+
+// Third Party imports
 import { useEffect, useState } from "react";
-import Cursor from "./components/Cursor";
 import { ReactLenis } from "lenis/react";
 import { useRef } from "react";
-import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import {
+  AnimatePresence,
+  motion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+
+// Custom Components
 import Footer from "./components/Footer";
 import Project from "./components/Project";
 import ModalComponent from "./components/ModalComponent";
 import NavBar from "./components/NavBar";
-import { AnimatePresence } from "framer-motion";
+import Cursor from "./components/Cursor";
+import Services from "./components/Services";
 
-gsap.registerPlugin(useGSAP);
+// GSAP Import
+import gsap from "gsap";
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [circlePos, setCirclePos] = useState({ top: "50%", left: "50%" });
   const [isActive, setIsActive] = useState(false);
-  const h1Ref = useRef(null);
+  const { scrollYProgress } = useScroll();
+  const translateY = useTransform(scrollYProgress, [0, 0.6, 1], [20, 0, 0]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 1], [0, 1, 1]);
+  const webRef = useRef(null);
+  const desktopRef = useRef(null);
+  const mobileRef = useRef(null);
+  const devopsRef = useRef(null);
 
   const about =
     "Omukk is a Bangladesh-based technology solution team dedicated to help startups and businesses to grow their impacts. Besides contact-based works, Omukk has its own projects that are constantly tested and upgraded for better uses.";
@@ -98,6 +114,7 @@ function App() {
     });
   };
   useEffect(() => {
+    createAnimation();
     const handleMouseMove = (e) => {
       const { clientX, clientY } = e;
       const { innerWidth, innerHeight } = window;
@@ -118,22 +135,53 @@ function App() {
     };
 
     window.addEventListener("mousemove", handleMouseMove);
-
-    createAnimation();
-
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
-  const toggleNav = () => {
-    setIsOpen(!isOpen);
-  };
+  useGSAP(() => {
+    ScrollTrigger.create({
+      trigger: webRef.current,
+      start: "top 20%",
+      end: "+=2020px",
+      scrub: true,
+      pin: true,
+      anticipatePin: 1,
+      pinSpacing: false,
+    });
+    ScrollTrigger.create({
+      trigger: desktopRef.current,
+      start: "top 30%",
+      end: "+=1515px",
+      scrub: true,
+      pin: true,
+      anticipatePin: 1,
+      pinSpacing: false,
+    });
+    ScrollTrigger.create({
+      trigger: mobileRef.current,
+      start: "top 40%",
+      end: "+=1010px",
+      scrub: true,
+      pin: true,
+      anticipatePin: 1,
+      pinSpacing: false,
+    });
+    ScrollTrigger.create({
+      trigger: devopsRef.current,
+      start: "top 50%",
+      end: "+=505px",
+      scrub: true,
+      pin: true,
+      anticipatePin: 1,
+      pinSpacing: false,
+    });
+  }, []);
 
   return (
     <ReactLenis root>
-      <div className="px-6 lg:px-32 bg-[#0B0B0B] h-full cursor-none">
-        <Cursor />
+      <div className="bg-[#0B0B0B] px-32 box-border h-full">
         <div
           className="lg:block hidden px-4 fixed  opacity-10  m-auto rounded-full w-[600px] h-[600px] bg-gradient-to-t from-[#0B0B0B] to-[#B8BBFF]"
           style={{
@@ -161,47 +209,234 @@ function App() {
             {isActive && <NavBar />}
           </AnimatePresence>
         </div>
-        <div
-          className={`${
-            isOpen ? "lg:-translate-x-1/2 -translate-x-80" : "translate-x-0"
-          } transition-transform duration-300 ease-in-out`}
-        >
+        <div>
           <section className="h-screen flex flex-col justify-center items-center gap-10 ">
             <img src="/logo-text-white.svg" alt="" className="lg:w-3/4" />
-            <CgMouse ref={container} size={40} className="text-white" />
+
+            <CgMouse size={40} className="text-white" />
+            <motion.div
+              initial={{ opacity: 0, y: -50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.5,
+                ease: "easeInOut",
+                repeat: Infinity,
+                repeatDelay: 0.5,
+              }}
+            >
+              <HiArrowLongDown size={30} className="text-white" />
+            </motion.div>
           </section>
-          <section
-            className="flex h-screen items-end justify-center mb-[25vh]"
-            id="about"
-          >
+          <section className="flex h-screen  justify-center" id="about">
             <div className="flex flex-wrap ">{splitWords(about)}</div>
           </section>
-          <section
-            className="h-screen flex flex-col lg:flex-row-reverse items-center justify-evenly lg:gap-20"
-            id="services"
-          >
-            <div className="lg:w-1/2">
-              <h1
-                ref={h1Ref}
-                className="text-white text-7xl lg:text-[8rem] font-Inter font-semibold tracking-tighter "
+          <section className="text-white h-[3200px] box-border">
+            <section className="flex flex-col pb-10">
+              <div>
+                <div className="w-1/2 text-[6vw] font-Inter tracking-tighter font-bold">
+                  <h1>WHAT WE DO /</h1>
+                </div>
+                <div className="w-1/2"></div>
+              </div>
+              <div className="flex">
+                <div className="w-1/2"></div>
+                <div className="w-1/2 flex">
+                  <h3 className="w-1/6 font-Inter tracking-tighter text-2xl opacity-50">
+                    (SERVICES)
+                  </h3>
+                  <p className="w-3/4 font-Inter tracking-tight text-2xl px-10">
+                    We offer our expertise in many different fields with utmost
+                    precision and elegant craftsmanship.
+                  </p>
+                </div>
+              </div>
+            </section>
+            <section className="h-full box-border">
+              <section
+                ref={webRef}
+                className="h-[600px] flex flex-col gap-6 border-t-[1px] border-[#eee]/40 w-full bg-[#0b0b0b] pt-4"
               >
-                Services
-              </h1>
-            </div>
-            <div className="flex flex-col gap-4 items-center lg:items-end lg:w-1/2">
-              <h3 className="font-Inter font-medium tracking-tight text-white text-5xl lg:text-7xl">
-                Web
-              </h3>
-              <h3 className="font-Inter font-medium tracking-tight text-white text-5xl lg:text-7xl">
-                Mobile
-              </h3>
-              <h3 className="font-Inter font-medium tracking-tight text-white text-5xl lg:text-7xl">
-                Desktop
-              </h3>
-              <h3 className="font-Inter font-medium tracking-tight text-white text-5xl lg:text-7xl">
-                DevOps
-              </h3>
-            </div>
+                <div className="flex justify-between items-center">
+                  <h1 className="font-Inter font-semibold tracking-tighter text-5xl">
+                    Web
+                  </h1>
+                </div>
+                <div className="flex w-full">
+                  <div className="w-1/2">
+                    <p className="font-Inter text-xl tracking-tighter w-2/3">
+                      We design and create unique, custom-coded websites that
+                      are tailored to your brand. We focus on scalability,
+                      performance, accessibility, and engaging animations for a
+                      memorable experience.
+                    </p>
+                  </div>
+                  <div className="w-1/2 flex flex-col gap-6">
+                    <div className="flex gap-10 border-b-[1px] border-[#eee]/40 pb-4">
+                      <h2 className="font-Inter tracking-tighter text-2xl">
+                        01
+                      </h2>
+                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
+                        Web Development
+                      </h1>
+                    </div>
+                    <div className="flex gap-10 border-b-[1px] border-[#eee]/40 pb-4">
+                      <h2 className="font-Inter tracking-tighter text-2xl">
+                        02
+                      </h2>
+                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
+                        Web Design
+                      </h1>
+                    </div>
+                    <div className="flex gap-10 pb-4">
+                      <h2 className="font-Inter tracking-tighter text-2xl">
+                        03
+                      </h2>
+                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
+                        Search Engine Opimitization
+                      </h1>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section
+                ref={desktopRef}
+                className="desktop-section h-[600px] flex flex-col gap-6 border-t-[1px] border-[#eee]/40 bg-[#0b0b0b] pt-4"
+              >
+                <div className="flex justify-between items-center">
+                  <h1 className="font-Inter font-semibold tracking-tighter text-5xl">
+                    Desktop
+                  </h1>
+                </div>
+                <div className="flex w-full">
+                  <div className="w-1/2">
+                    <p className="font-Inter text-xl tracking-tighter w-2/3">
+                      We design and create unique, custom-coded websites that
+                      are tailored to your brand. We focus on scalability,
+                      performance, accessibility, and engaging animations for a
+                      memorable experience.
+                    </p>
+                  </div>
+                  <div className="w-1/2 flex flex-col gap-6">
+                    <div className="flex gap-10 border-b-[1px] border-[#eee]/40 pb-4">
+                      <h2 className="font-Inter tracking-tighter text-2xl">
+                        01
+                      </h2>
+                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
+                        Application Design
+                      </h1>
+                    </div>
+                    <div className="flex gap-10 border-b-[1px] border-[#eee]/40 pb-4">
+                      <h2 className="font-Inter tracking-tighter text-2xl">
+                        02
+                      </h2>
+                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
+                        Web Design
+                      </h1>
+                    </div>
+                    <div className="flex gap-10 pb-4">
+                      <h2 className="font-Inter tracking-tighter text-2xl">
+                        03
+                      </h2>
+                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
+                        Search Engine Opimitization
+                      </h1>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section
+                ref={mobileRef}
+                className="mobile-section h-[600px] flex flex-col gap-6 border-t-[1px] border-[#eee]/40 bg-[#0b0b0b] pt-4"
+              >
+                <div className="flex justify-between items-center">
+                  <h1 className="font-Inter font-semibold tracking-tighter text-5xl">
+                    Mobile
+                  </h1>
+                </div>
+                <div className="flex w-full">
+                  <div className="w-1/2">
+                    <p className="font-Inter text-xl tracking-tighter w-2/3">
+                      We design and create unique, custom-coded websites that
+                      are tailored to your brand. We focus on scalability,
+                      performance, accessibility, and engaging animations for a
+                      memorable experience.
+                    </p>
+                  </div>
+                  <div className="w-1/2 flex flex-col gap-6">
+                    <div className="flex gap-10 border-b-[1px] border-[#eee]/40 pb-4">
+                      <h2 className="font-Inter tracking-tighter text-2xl">
+                        01
+                      </h2>
+                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
+                        Web Development
+                      </h1>
+                    </div>
+                    <div className="flex gap-10 border-b-[1px] border-[#eee]/40 pb-4">
+                      <h2 className="font-Inter tracking-tighter text-2xl">
+                        02
+                      </h2>
+                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
+                        Web Design
+                      </h1>
+                    </div>
+                    <div className="flex gap-10 pb-4">
+                      <h2 className="font-Inter tracking-tighter text-2xl">
+                        03
+                      </h2>
+                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
+                        Search Engine Opimitization
+                      </h1>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section
+                ref={devopsRef}
+                className="h-[600px] flex flex-col gap-6 border-t-[1px] border-[#eee]/40 bg-[#0b0b0b] pt-4"
+              >
+                <div className="flex justify-between items-center">
+                  <h1 className="font-Inter font-semibold tracking-tighter text-5xl">
+                    DevOps
+                  </h1>
+                </div>
+                <div className="flex w-full">
+                  <div className="w-1/2">
+                    <p className="font-Inter text-xl tracking-tighter w-2/3">
+                      We design and create unique, custom-coded websites that
+                      are tailored to your brand. We focus on scalability,
+                      performance, accessibility, and engaging animations for a
+                      memorable experience.
+                    </p>
+                  </div>
+                  <div className="w-1/2 flex flex-col gap-6">
+                    <div className="flex gap-10 border-b-[1px] border-[#eee]/40 pb-4">
+                      <h2 className="font-Inter tracking-tighter text-2xl">
+                        01
+                      </h2>
+                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
+                        Web Development
+                      </h1>
+                    </div>
+                    <div className="flex gap-10 border-b-[1px] border-[#eee]/40 pb-4">
+                      <h2 className="font-Inter tracking-tighter text-2xl">
+                        02
+                      </h2>
+                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
+                        Web Design
+                      </h1>
+                    </div>
+                    <div className="flex gap-10 pb-4">
+                      <h2 className="font-Inter tracking-tighter text-2xl">
+                        03
+                      </h2>
+                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
+                        Search Engine Opimitization
+                      </h1>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </section>
           </section>
           <section
             className="flex flex-col gap-2 items-start h-screen mt-[20vh]"
@@ -209,9 +444,18 @@ function App() {
           >
             <div className="flex flex-col gap-2 w-full">
               <div className="flex justify-between w-full">
-                <h1 className="text-white font-Inter tracking-tighter text-2xl font-semibold">
+                <motion.h1
+                  style={{
+                    translateY,
+                    opacity,
+                  }}
+                  // initial={{ opacity: 0, y: 20 }}
+                  // animate={{ opacity: 1, y: 0 }}
+                  // transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="text-white font-Inter tracking-tighter text-2xl font-semibold"
+                >
                   Featured Work
-                </h1>
+                </motion.h1>
                 <p className="text-white font-Inter tracking-tighter text-lg opacity-30">
                   /works/featured
                 </p>
