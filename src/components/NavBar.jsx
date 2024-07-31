@@ -48,11 +48,11 @@ export default function NavBar() {
       initial="initial"
       animate="enter"
       exit="exit"
-      className="h-screen bg-[#313131] fixed right-0 top-0 text-white -z-10"
+      className="h-screen bg-[#313131] fixed lg:-right-16 -right-7 -top-5 lg:-top-5 text-white -z-10 "
     >
-      <div className="fixed left-96 -top-32 -z-50 w-[500px] h-[500px] bg-[#5a5a5a] rounded-full"></div>
-      <div className="fixed left-80 -top-52 -z-50 w-[500px] h-[500px] bg-[#b1b1b1] rounded-full"></div>
-      <div className="box-border h-screen pr-60 pt-20 pb-10 pl-20 flex flex-col justify-between ">
+      <div className="fixed lg:left-96 lg:-top-32 left-64 -top-24 -z-50 w-[500px] h-[500px] bg-[#5a5a5a] rounded-full"></div>
+      <div className="fixed lg:left-80 lg:-top-52 left-48 -top-40 -z-50 w-[500px] h-[500px] bg-[#b1b1b1] rounded-full"></div>
+      <div className="box-border h-screen lg:pr-60 lg:pt-20 lg:pb-10 lg:pl-20 pr-10 pl-10 pb-20 pt-24 flex flex-col justify-between">
         <div
           onMouseLeave={() => {
             setSelectedIndicator(window.location.pathname);

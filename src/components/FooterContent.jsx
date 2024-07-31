@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Content() {
   return (
-    <div className="bg-white py-8 px-12 h-full w-full flex flex-col justify-between rounded-t-3xl overflow-hidden">
+    <div className="bg-white p-10 h-full w-full flex flex-col justify-between rounded-t-3xl overflow-hidden">
       <NavMenu />
     </div>
   );
@@ -37,7 +37,7 @@ const TextScroll = ({ text, slider }) => {
 
 const Nav = () => {
   return (
-    <div className="flex w-full">
+    <div className="flex flex-col lg:flex-row gap-8 lg:gap-0 w-full">
       <div className="lg:w-1/3 flex flex-col gap-4">
         <h1 className="font-Inter text-3xl text-black tracking-tighter font-medium">
           SOCIALS

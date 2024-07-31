@@ -26,19 +26,20 @@ import Services from "./components/Services";
 
 // GSAP Import
 import gsap from "gsap";
+import Marquee from "./components/Marquee";
+import Works from "./components/Works";
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
   const [circlePos, setCirclePos] = useState({ top: "50%", left: "50%" });
-  const [isActive, setIsActive] = useState(false);
-  const { scrollYProgress } = useScroll();
-  const translateY = useTransform(scrollYProgress, [0, 0.6, 1], [20, 0, 0]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 1], [0, 1, 1]);
+  const [isActive, setIsActive] = useState(null);
   const webRef = useRef(null);
   const desktopRef = useRef(null);
   const mobileRef = useRef(null);
   const devopsRef = useRef(null);
+  const logoRef = useRef(null);
+  const navRef = useRef(null);
+  const aboutRef = useRef(null);
 
   const about =
     "Omukk is a Bangladesh-based technology solution team dedicated to help startups and businesses to grow their impacts. Besides contact-based works, Omukk has its own projects that are constantly tested and upgraded for better uses.";
@@ -60,45 +61,6 @@ function App() {
   const [modal, setModal] = useState({ active: false, index: 0 });
   let refs = useRef([]);
   const container = useRef(null);
-
-  const splitWords = (phrase) => {
-    let body = [];
-
-    phrase.split("  ").forEach((word, i) => {
-      const letters = splitLetters(word);
-
-      body.push(
-        <p
-          className="text-white lg:text-[3.5vw] font-Inter tracking-tighter font-semibold"
-          key={word + "_" + i}
-        >
-          {letters}
-        </p>
-      );
-    });
-
-    return body;
-  };
-
-  const splitLetters = (word) => {
-    let letters = [];
-
-    word.split("").forEach((letter, i) => {
-      letters.push(
-        <span
-          className="opacity-20"
-          key={letter + "_" + i}
-          ref={(el) => {
-            refs.current.push(el);
-          }}
-        >
-          {letter}
-        </span>
-      );
-    });
-
-    return letters;
-  };
 
   const createAnimation = () => {
     gsap.to(refs.current, {
@@ -177,13 +139,38 @@ function App() {
       anticipatePin: 1,
       pinSpacing: false,
     });
+
+    // gsap.to(logoRef.current, {
+    //   scrollTrigger: {
+    //     trigger: logoRef.current,
+    //     start: "30% 50%",
+    //     end: "+=400px",
+    //     scrub: 1,
+    //   },
+    //   scale: 0.6,
+    //   x: -160,
+    //   y: 435,
+    //   duration: 5,
+    //   ease: "sine.inOut",
+    // });
+    gsap.to(navRef.current, {
+      scrollTrigger: {
+        trigger: aboutRef.current,
+        start: "-400px 30%",
+        end: "+=300px",
+        scrub: 1,
+      },
+      scale: 1,
+      duration: 0.7,
+      ease: "power3.out",
+    });
   }, []);
 
   return (
     <ReactLenis root>
-      <div className="bg-[#0B0B0B] px-32 box-border h-full">
+      <div className="bg-[#0B0B0B] box-border h-full">
         <div
-          className="lg:block hidden px-4 fixed  opacity-10  m-auto rounded-full w-[600px] h-[600px] bg-gradient-to-t from-[#0B0B0B] to-[#B8BBFF]"
+          className="lg:block hidden px-4 fixed opacity-10  m-auto rounded-full w-[600px] h-[600px] bg-gradient-to-t from-[#0B0B0B] to-[#B8BBFF]"
           style={{
             top: circlePos.top,
             left: circlePos.left,
@@ -191,10 +178,11 @@ function App() {
           }}
         ></div>
         <div
+          ref={navRef}
           onClick={() => {
             setIsActive(!isActive);
           }}
-          className="fixed right-10 m-[20px] z-10 flex items-center justify-center"
+          className="scale-0 fixed right-2 lg:right-10 m-[20px] z-10 flex items-center justify-center"
         >
           <div className="w-[70px] h-[70px] bg-[#525252] rounded-full cursor-pointer">
             <div
@@ -210,41 +198,161 @@ function App() {
           </AnimatePresence>
         </div>
         <div>
-          <section className="h-screen flex flex-col justify-center items-center gap-10 ">
-            <img src="/logo-text-white.svg" alt="" className="lg:w-3/4" />
-
-            <CgMouse size={40} className="text-white" />
-            <motion.div
-              initial={{ opacity: 0, y: -50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.5,
-                ease: "easeInOut",
-                repeat: Infinity,
-                repeatDelay: 0.5,
-              }}
-            >
-              <HiArrowLongDown size={30} className="text-white" />
-            </motion.div>
-          </section>
-          <section className="flex h-screen  justify-center" id="about">
-            <div className="flex flex-wrap ">{splitWords(about)}</div>
-          </section>
-          <section className="text-white h-[3200px] box-border">
-            <section className="flex flex-col pb-10">
+          <section className="h-screen flex flex-col justify-between z-10 p-[30px]">
+            <div className="flex lg:flex-row flex-col justify-between text-xl lg:text-md gap-2 lg:gap-0">
               <div>
-                <div className="w-1/2 text-[6vw] font-Inter tracking-tighter font-bold">
-                  <h1>WHAT WE DO /</h1>
-                </div>
-                <div className="w-1/2"></div>
+                <motion.a
+                  initial="initial"
+                  whileHover="hovered"
+                  href="#about"
+                  className="relative block overflow-hidden whitespace-nowrap font-jetbrain  w-fit leading-4 text-[#d9d9d9]"
+                >
+                  <motion.div
+                    variants={{
+                      initial: { y: 0 },
+                      hovered: { y: "-100%" },
+                    }}
+                  >
+                    ABOUT
+                  </motion.div>
+                  <motion.div
+                    className="absolute inset-0"
+                    variants={{
+                      initial: { y: "100%" },
+                      hovered: { y: "0" },
+                    }}
+                  >
+                    ABOUT
+                  </motion.div>
+                </motion.a>
               </div>
-              <div className="flex">
-                <div className="w-1/2"></div>
-                <div className="w-1/2 flex">
-                  <h3 className="w-1/6 font-Inter tracking-tighter text-2xl opacity-50">
+              <div className="flex lg:flex-row flex-col lg:w-1/3 justify-between gap-2 lg:gap-0">
+                <motion.a
+                  initial="initial"
+                  whileHover="hovered"
+                  href="#services"
+                  className="relative block overflow-hidden whitespace-nowrap font-jetbrain  w-fit leading-4 text-[#d9d9d9]"
+                >
+                  <motion.div
+                    variants={{
+                      initial: { y: 0 },
+                      hovered: { y: "-100%" },
+                    }}
+                  >
+                    SERVICES
+                  </motion.div>
+                  <motion.div
+                    className="absolute inset-0"
+                    variants={{
+                      initial: { y: "100%" },
+                      hovered: { y: "0" },
+                    }}
+                  >
+                    SERVICES
+                  </motion.div>
+                </motion.a>
+                <motion.a
+                  initial="initial"
+                  whileHover="hovered"
+                  href="#works"
+                  className="relative block overflow-hidden whitespace-nowrap font-jetbrain  w-fit leading-4 text-[#d9d9d9]"
+                >
+                  <motion.div
+                    variants={{
+                      initial: { y: 0 },
+                      hovered: { y: "-100%" },
+                    }}
+                  >
+                    SELECTED WORKS
+                  </motion.div>
+                  <motion.div
+                    className="absolute inset-0"
+                    variants={{
+                      initial: { y: "100%" },
+                      hovered: { y: "0" },
+                    }}
+                  >
+                    SELECTED WORKS
+                  </motion.div>
+                </motion.a>
+              </div>
+              <div>
+                <motion.a
+                  initial="initial"
+                  whileHover="hovered"
+                  href="#contact"
+                  className="relative block overflow-hidden whitespace-nowrap font-jetbrain  w-fit leading-4 text-[#d9d9d9]"
+                >
+                  <motion.div
+                    variants={{
+                      initial: { y: 0 },
+                      hovered: { y: "-100%" },
+                    }}
+                  >
+                    CONTACT
+                  </motion.div>
+                  <motion.div
+                    className="absolute inset-0"
+                    variants={{
+                      initial: { y: "100%" },
+                      hovered: { y: "0" },
+                    }}
+                  >
+                    CONTACT
+                  </motion.div>
+                </motion.a>
+              </div>
+            </div>
+            <div className="flex justify-end">
+              <h1 className="font-helvetica text-[#d9d9d9] text-4xl tracking-tight">
+                // A group of creative thinkers making things <br /> smarter,
+                newer and more memorable.
+              </h1>
+            </div>
+            <div className="flex gap-4 ">
+              <h1
+                ref={logoRef}
+                className="font-helvetica text-[#d9d9d9] text-[100px] lg:text-[350px] tracking-tighter z-50 font-normal"
+              >
+                OMUKK
+              </h1>
+            </div>
+          </section>
+          <section className="h-screen" id="about">
+            <div className="" ref={aboutRef}>
+              <h1 className="font-helvetica tracking-tighter lg:text-[10vw] text-7xl text-[#d9d9d9]">
+                OMUKK /
+              </h1>
+            </div>
+            <div className="flex flex-col lg:flex-row justify-center px-6 lg:px-0">
+              <div className="lg:w-1/2 lg:h-auto h-10 w-1/2"></div>
+              <div className="lg:w-1/2 flex flex-col lg:flex-row gap-6 lg:gap-0 justify-evenly">
+                <h3 className="lg:w-1/6 font-jetbrain tracking-tighter text-2xl text-[#d9d9d9]">
+                  (ABOUT)
+                </h3>
+                <p className="font-helvetica tracking-tighter text-3xl lg:w-1/2 w-full text-[#d9d9d9]">
+                  {about}
+                </p>
+              </div>
+            </div>
+          </section>
+          <section className="text-white h-[3100px] box-border lg:px-[40px] p-[20px]">
+            <section className="flex flex-col pb-10">
+              <div className="">
+                <div className="lg:w-3/4 w-full">
+                  <h1 className="lg:text-[140px] text-5xl font-Inter tracking-tighter font-bold lg:mr-20">
+                    WHAT WE DO /
+                  </h1>
+                </div>
+                <div className="w-1/4"></div>
+              </div>
+              <div className="flex flex-col lg:flex-row">
+                <div className="lg:w-1/2"></div>
+                <div className="lg:w-1/2 flex flex-col lg:flex-row lg:gap-0 gap-6 justify-evenly">
+                  <h3 className="lg:w-1/6 font-jetbrain tracking-tighter lg:text-2xl text-xl opacity-50">
                     (SERVICES)
                   </h3>
-                  <p className="w-3/4 font-Inter tracking-tight text-2xl px-10">
+                  <p className="lg:w-1/2 font-Inter tracking-tight lg:text-2xl text-2xl">
                     We offer our expertise in many different fields with utmost
                     precision and elegant craftsmanship.
                   </p>
@@ -261,38 +369,38 @@ function App() {
                     Web
                   </h1>
                 </div>
-                <div className="flex w-full">
-                  <div className="w-1/2">
-                    <p className="font-Inter text-xl tracking-tighter w-2/3">
+                <div className="flex flex-col gap-10 lg:gap-0 lg:flex-row w-full">
+                  <div className="lg:w-1/2">
+                    <p className="font-Inter text-xl tracking-tighter lg:w-2/3">
                       We design and create unique, custom-coded websites that
                       are tailored to your brand. We focus on scalability,
                       performance, accessibility, and engaging animations for a
                       memorable experience.
                     </p>
                   </div>
-                  <div className="w-1/2 flex flex-col gap-6">
+                  <div className="lg:w-1/2 flex flex-col gap-6">
                     <div className="flex gap-10 border-b-[1px] border-[#eee]/40 pb-4">
-                      <h2 className="font-Inter tracking-tighter text-2xl">
+                      <h2 className="font-Inter tracking-tighter lg:text-2xl">
                         01
                       </h2>
-                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
+                      <h1 className="font-Inter tracking-tighter lg:text-4xl text-2xl font-semibold">
                         Web Development
                       </h1>
                     </div>
                     <div className="flex gap-10 border-b-[1px] border-[#eee]/40 pb-4">
-                      <h2 className="font-Inter tracking-tighter text-2xl">
+                      <h2 className="font-Inter tracking-tighter lg:text-2xl">
                         02
                       </h2>
-                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
+                      <h1 className="font-Inter tracking-tighter lg:text-4xl text-2xl font-semibold">
                         Web Design
                       </h1>
                     </div>
                     <div className="flex gap-10 pb-4">
-                      <h2 className="font-Inter tracking-tighter text-2xl">
+                      <h2 className="font-Inter tracking-tighter lg:text-2xl">
                         03
                       </h2>
-                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
-                        Search Engine Opimitization
+                      <h1 className="font-Inter tracking-tighter lg:text-4xl text-2xl font-semibold">
+                        SEO
                       </h1>
                     </div>
                   </div>
@@ -304,41 +412,41 @@ function App() {
               >
                 <div className="flex justify-between items-center">
                   <h1 className="font-Inter font-semibold tracking-tighter text-5xl">
-                    Desktop
+                    Mobile
                   </h1>
                 </div>
-                <div className="flex w-full">
-                  <div className="w-1/2">
-                    <p className="font-Inter text-xl tracking-tighter w-2/3">
+                <div className="flex flex-col gap-10 lg:gap-0 lg:flex-row w-full">
+                  <div className="lg:w-1/2">
+                    <p className="font-Inter text-xl tracking-tighter lg:w-2/3">
                       We design and create unique, custom-coded websites that
                       are tailored to your brand. We focus on scalability,
                       performance, accessibility, and engaging animations for a
                       memorable experience.
                     </p>
                   </div>
-                  <div className="w-1/2 flex flex-col gap-6">
+                  <div className="lg:w-1/2 flex flex-col gap-6">
                     <div className="flex gap-10 border-b-[1px] border-[#eee]/40 pb-4">
-                      <h2 className="font-Inter tracking-tighter text-2xl">
+                      <h2 className="font-Inter tracking-tighter lg:text-2xl">
                         01
                       </h2>
-                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
-                        Application Design
+                      <h1 className="font-Inter tracking-tighter lg:text-4xl text-2xl font-semibold">
+                        Web Development
                       </h1>
                     </div>
                     <div className="flex gap-10 border-b-[1px] border-[#eee]/40 pb-4">
-                      <h2 className="font-Inter tracking-tighter text-2xl">
+                      <h2 className="font-Inter tracking-tighter lg:text-2xl">
                         02
                       </h2>
-                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
+                      <h1 className="font-Inter tracking-tighter lg:text-4xl text-2xl font-semibold">
                         Web Design
                       </h1>
                     </div>
                     <div className="flex gap-10 pb-4">
-                      <h2 className="font-Inter tracking-tighter text-2xl">
+                      <h2 className="font-Inter tracking-tighter lg:text-2xl">
                         03
                       </h2>
-                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
-                        Search Engine Opimitization
+                      <h1 className="font-Inter tracking-tighter lg:text-4xl text-2xl font-semibold">
+                        SEO
                       </h1>
                     </div>
                   </div>
@@ -350,41 +458,41 @@ function App() {
               >
                 <div className="flex justify-between items-center">
                   <h1 className="font-Inter font-semibold tracking-tighter text-5xl">
-                    Mobile
+                    Desktop
                   </h1>
                 </div>
-                <div className="flex w-full">
-                  <div className="w-1/2">
-                    <p className="font-Inter text-xl tracking-tighter w-2/3">
+                <div className="flex flex-col gap-10 lg:gap-0 lg:flex-row w-full">
+                  <div className="lg:w-1/2">
+                    <p className="font-Inter text-xl tracking-tighter lg:w-2/3">
                       We design and create unique, custom-coded websites that
                       are tailored to your brand. We focus on scalability,
                       performance, accessibility, and engaging animations for a
                       memorable experience.
                     </p>
                   </div>
-                  <div className="w-1/2 flex flex-col gap-6">
+                  <div className="lg:w-1/2 flex flex-col gap-6">
                     <div className="flex gap-10 border-b-[1px] border-[#eee]/40 pb-4">
-                      <h2 className="font-Inter tracking-tighter text-2xl">
+                      <h2 className="font-Inter tracking-tighter lg:text-2xl">
                         01
                       </h2>
-                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
+                      <h1 className="font-Inter tracking-tighter lg:text-4xl text-2xl font-semibold">
                         Web Development
                       </h1>
                     </div>
                     <div className="flex gap-10 border-b-[1px] border-[#eee]/40 pb-4">
-                      <h2 className="font-Inter tracking-tighter text-2xl">
+                      <h2 className="font-Inter tracking-tighter lg:text-2xl">
                         02
                       </h2>
-                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
+                      <h1 className="font-Inter tracking-tighter lg:text-4xl text-2xl font-semibold">
                         Web Design
                       </h1>
                     </div>
                     <div className="flex gap-10 pb-4">
-                      <h2 className="font-Inter tracking-tighter text-2xl">
+                      <h2 className="font-Inter tracking-tighter lg:text-2xl">
                         03
                       </h2>
-                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
-                        Search Engine Opimitization
+                      <h1 className="font-Inter tracking-tighter lg:text-4xl text-2xl font-semibold">
+                        SEO
                       </h1>
                     </div>
                   </div>
@@ -399,38 +507,38 @@ function App() {
                     DevOps
                   </h1>
                 </div>
-                <div className="flex w-full">
-                  <div className="w-1/2">
-                    <p className="font-Inter text-xl tracking-tighter w-2/3">
+                <div className="flex flex-col gap-10 lg:gap-0 lg:flex-row w-full">
+                  <div className="lg:w-1/2">
+                    <p className="font-Inter text-xl tracking-tighter lg:w-2/3">
                       We design and create unique, custom-coded websites that
                       are tailored to your brand. We focus on scalability,
                       performance, accessibility, and engaging animations for a
                       memorable experience.
                     </p>
                   </div>
-                  <div className="w-1/2 flex flex-col gap-6">
+                  <div className="lg:w-1/2 flex flex-col gap-6">
                     <div className="flex gap-10 border-b-[1px] border-[#eee]/40 pb-4">
-                      <h2 className="font-Inter tracking-tighter text-2xl">
+                      <h2 className="font-Inter tracking-tighter lg:text-2xl">
                         01
                       </h2>
-                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
+                      <h1 className="font-Inter tracking-tighter lg:text-4xl text-2xl font-semibold">
                         Web Development
                       </h1>
                     </div>
                     <div className="flex gap-10 border-b-[1px] border-[#eee]/40 pb-4">
-                      <h2 className="font-Inter tracking-tighter text-2xl">
+                      <h2 className="font-Inter tracking-tighter lg:text-2xl">
                         02
                       </h2>
-                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
+                      <h1 className="font-Inter tracking-tighter lg:text-4xl text-2xl font-semibold">
                         Web Design
                       </h1>
                     </div>
                     <div className="flex gap-10 pb-4">
-                      <h2 className="font-Inter tracking-tighter text-2xl">
+                      <h2 className="font-Inter tracking-tighter lg:text-2xl">
                         03
                       </h2>
-                      <h1 className="font-Inter tracking-tighter text-4xl font-semibold">
-                        Search Engine Opimitization
+                      <h1 className="font-Inter tracking-tighter lg:text-4xl text-2xl font-semibold">
+                        SEO
                       </h1>
                     </div>
                   </div>
@@ -438,47 +546,11 @@ function App() {
               </section>
             </section>
           </section>
+          <div id="works" className="">
+            <Works />
+          </div>
           <section
-            className="flex flex-col gap-2 items-start h-screen mt-[20vh]"
-            id="works"
-          >
-            <div className="flex flex-col gap-2 w-full">
-              <div className="flex justify-between w-full">
-                <motion.h1
-                  style={{
-                    translateY,
-                    opacity,
-                  }}
-                  // initial={{ opacity: 0, y: 20 }}
-                  // animate={{ opacity: 1, y: 0 }}
-                  // transition={{ duration: 0.5, ease: "easeInOut" }}
-                  className="text-white font-Inter tracking-tighter text-2xl font-semibold"
-                >
-                  Featured Work
-                </motion.h1>
-                <p className="text-white font-Inter tracking-tighter text-lg opacity-30">
-                  /works/featured
-                </p>
-              </div>
-              <div className="bg-white h-0.5 w-full rounded-full"></div>
-            </div>
-            <div className="w-full flex flex-col items-center justify-center">
-              {works.map((work, index) => {
-                return (
-                  <Project
-                    index={index}
-                    title={work.title}
-                    contribution={work.contribution}
-                    setModal={setModal}
-                    key={index}
-                  />
-                );
-              })}
-            </div>
-            <ModalComponent modal={modal} works={works} />
-          </section>
-          <section
-            className="h-screen relative flex flex-col gap-16 lg:gap-24"
+            className="h-screen relative flex flex-col gap-16 lg:gap-24 lg:px-[80px]"
             id="contact"
           >
             <div className="lg:h-3/4">

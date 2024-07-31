@@ -5,6 +5,8 @@ export default {
     extend: {
       fontFamily: {
         Inter: ["Inter", "sans-serif"],
+        jetbrain: ["JetBrains Mono", "sans-serif"],
+        helvetica: ["Helvetica Neue", "sans-serif"],
       },
       mixBlendMode: {
         difference: "difference",

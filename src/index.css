@@ -56,3 +56,9 @@ html.lenis body {
     transform: translateX(-50%);
   }
 }
+
+.marker {
+  height: 1rem;
+  width: 0.1rem;
+  background-color: white;
+}
