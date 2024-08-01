@@ -1,20 +1,12 @@
 // SVG imports
-import { CgMouse } from "react-icons/cg";
-import { HiArrowLongRight, HiArrowLongDown } from "react-icons/hi2";
-import { ImMap } from "react-icons/im";
+import { HiArrowLongRight } from "react-icons/hi2";
 
 // Third Party imports
 import { useEffect, useState } from "react";
 import { ReactLenis } from "lenis/react";
 import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  AnimatePresence,
-  motion,
-  useScroll,
-  useTransform,
-} from "framer-motion";
+
+import { AnimatePresence, motion } from "framer-motion";
 
 // Custom Components
 import Footer from "./components/Footer";
@@ -23,13 +15,13 @@ import ModalComponent from "./components/ModalComponent";
 import NavBar from "./components/NavBar";
 import Cursor from "./components/Cursor";
 import Services from "./components/Services";
+import Works from "./components/Works";
 
 // GSAP Import
 import gsap from "gsap";
-import Marquee from "./components/Marquee";
-import Works from "./components/Works";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
-
 function App() {
   const [circlePos, setCirclePos] = useState({ top: "50%", left: "50%" });
   const [isActive, setIsActive] = useState(null);
@@ -40,6 +32,7 @@ function App() {
   const logoRef = useRef(null);
   const navRef = useRef(null);
   const aboutRef = useRef(null);
+  const mm = gsap.matchMedia();
 
   const about =
     "Omukk is a Bangladesh-based technology solution team dedicated to help startups and businesses to grow their impacts. Besides contact-based works, Omukk has its own projects that are constantly tested and upgraded for better uses.";
@@ -153,16 +146,18 @@ function App() {
     //   duration: 5,
     //   ease: "sine.inOut",
     // });
-    gsap.to(navRef.current, {
-      scrollTrigger: {
-        trigger: aboutRef.current,
-        start: "-400px 30%",
-        end: "+=300px",
-        scrub: 1,
-      },
-      scale: 1,
-      duration: 0.7,
-      ease: "power3.out",
+    mm.add("(min-width: 480px", () => {
+      gsap.to(navRef.current, {
+        scrollTrigger: {
+          trigger: aboutRef.current,
+          start: "-400px 30%",
+          end: "+=300px",
+          scrub: 1,
+        },
+        scale: 1,
+        duration: 0.7,
+        ease: "power3.out",
+      });
     });
   }, []);
 
@@ -182,7 +177,7 @@ function App() {
           onClick={() => {
             setIsActive(!isActive);
           }}
-          className="scale-0 fixed right-2 lg:right-10 m-[20px] z-10 flex items-center justify-center"
+          className="lg:scale-0 fixed right-2 top-4 lg:right-10 m-[20px] z-10 flex items-center justify-center"
         >
           <div className="w-[70px] h-[70px] bg-[#525252] rounded-full cursor-pointer">
             <div
@@ -198,115 +193,120 @@ function App() {
           </AnimatePresence>
         </div>
         <div>
-          <section className="h-screen flex flex-col justify-between z-10 p-[30px]">
-            <div className="flex lg:flex-row flex-col justify-between text-xl lg:text-md gap-2 lg:gap-0">
-              <div>
-                <motion.a
-                  initial="initial"
-                  whileHover="hovered"
-                  href="#about"
-                  className="relative block overflow-hidden whitespace-nowrap font-jetbrain  w-fit leading-4 text-[#d9d9d9]"
-                >
-                  <motion.div
-                    variants={{
-                      initial: { y: 0 },
-                      hovered: { y: "-100%" },
-                    }}
-                  >
-                    ABOUT
-                  </motion.div>
-                  <motion.div
-                    className="absolute inset-0"
-                    variants={{
-                      initial: { y: "100%" },
-                      hovered: { y: "0" },
-                    }}
-                  >
-                    ABOUT
-                  </motion.div>
-                </motion.a>
+          <section className="h-screen flex flex-col justify-between z-10 lg:p-[40px] p-8">
+            <div className="flex flex-row items-center lg:items-start justify-between text-xl lg:text-md gap-2 lg:gap-0">
+              <div className="lg:hidden">
+                <img src="/logo-icon-white.svg" alt="" className="h-20 w-20" />
               </div>
-              <div className="flex lg:flex-row flex-col lg:w-1/3 justify-between gap-2 lg:gap-0">
-                <motion.a
-                  initial="initial"
-                  whileHover="hovered"
-                  href="#services"
-                  className="relative block overflow-hidden whitespace-nowrap font-jetbrain  w-fit leading-4 text-[#d9d9d9]"
-                >
-                  <motion.div
-                    variants={{
-                      initial: { y: 0 },
-                      hovered: { y: "-100%" },
-                    }}
+              <div className="hidden lg:flex lg:flex-row flex-col items-end lg:items-start justify-between text-xl lg:text-md gap-2 lg:gap-0 w-full">
+                <div>
+                  <motion.a
+                    initial="initial"
+                    whileHover="hovered"
+                    href="#about"
+                    className="relative block overflow-hidden whitespace-nowrap font-jetbrain  w-fit leading-4 text-[#d9d9d9]"
                   >
-                    SERVICES
-                  </motion.div>
-                  <motion.div
-                    className="absolute inset-0"
-                    variants={{
-                      initial: { y: "100%" },
-                      hovered: { y: "0" },
-                    }}
+                    <motion.div
+                      variants={{
+                        initial: { y: 0 },
+                        hovered: { y: "-100%" },
+                      }}
+                    >
+                      ABOUT
+                    </motion.div>
+                    <motion.div
+                      className="absolute inset-0"
+                      variants={{
+                        initial: { y: "100%" },
+                        hovered: { y: "0" },
+                      }}
+                    >
+                      ABOUT
+                    </motion.div>
+                  </motion.a>
+                </div>
+                <div className="flex lg:flex-row flex-col lg:w-1/3 items-end lg:items-start justify-between gap-2 lg:gap-0">
+                  <motion.a
+                    initial="initial"
+                    whileHover="hovered"
+                    href="#services"
+                    className="relative block overflow-hidden whitespace-nowrap font-jetbrain  w-fit leading-4 text-[#d9d9d9]"
                   >
-                    SERVICES
-                  </motion.div>
-                </motion.a>
-                <motion.a
-                  initial="initial"
-                  whileHover="hovered"
-                  href="#works"
-                  className="relative block overflow-hidden whitespace-nowrap font-jetbrain  w-fit leading-4 text-[#d9d9d9]"
-                >
-                  <motion.div
-                    variants={{
-                      initial: { y: 0 },
-                      hovered: { y: "-100%" },
-                    }}
+                    <motion.div
+                      variants={{
+                        initial: { y: 0 },
+                        hovered: { y: "-100%" },
+                      }}
+                    >
+                      SERVICES
+                    </motion.div>
+                    <motion.div
+                      className="absolute inset-0"
+                      variants={{
+                        initial: { y: "100%" },
+                        hovered: { y: "0" },
+                      }}
+                    >
+                      SERVICES
+                    </motion.div>
+                  </motion.a>
+                  <motion.a
+                    initial="initial"
+                    whileHover="hovered"
+                    href="#works"
+                    className="relative block overflow-hidden whitespace-nowrap font-jetbrain  w-fit leading-4 text-[#d9d9d9]"
                   >
-                    SELECTED WORKS
-                  </motion.div>
-                  <motion.div
-                    className="absolute inset-0"
-                    variants={{
-                      initial: { y: "100%" },
-                      hovered: { y: "0" },
-                    }}
+                    <motion.div
+                      variants={{
+                        initial: { y: 0 },
+                        hovered: { y: "-100%" },
+                      }}
+                    >
+                      SELECTED WORKS
+                    </motion.div>
+                    <motion.div
+                      className="absolute inset-0"
+                      variants={{
+                        initial: { y: "100%" },
+                        hovered: { y: "0" },
+                      }}
+                    >
+                      SELECTED WORKS
+                    </motion.div>
+                  </motion.a>
+                </div>
+                <div>
+                  <motion.a
+                    initial="initial"
+                    whileHover="hovered"
+                    href="#contact"
+                    className="relative block overflow-hidden whitespace-nowrap font-jetbrain  w-fit leading-4 text-[#d9d9d9]"
                   >
-                    SELECTED WORKS
-                  </motion.div>
-                </motion.a>
-              </div>
-              <div>
-                <motion.a
-                  initial="initial"
-                  whileHover="hovered"
-                  href="#contact"
-                  className="relative block overflow-hidden whitespace-nowrap font-jetbrain  w-fit leading-4 text-[#d9d9d9]"
-                >
-                  <motion.div
-                    variants={{
-                      initial: { y: 0 },
-                      hovered: { y: "-100%" },
-                    }}
-                  >
-                    CONTACT
-                  </motion.div>
-                  <motion.div
-                    className="absolute inset-0"
-                    variants={{
-                      initial: { y: "100%" },
-                      hovered: { y: "0" },
-                    }}
-                  >
-                    CONTACT
-                  </motion.div>
-                </motion.a>
+                    <motion.div
+                      variants={{
+                        initial: { y: 0 },
+                        hovered: { y: "-100%" },
+                      }}
+                    >
+                      CONTACT
+                    </motion.div>
+                    <motion.div
+                      className="absolute inset-0"
+                      variants={{
+                        initial: { y: "100%" },
+                        hovered: { y: "0" },
+                      }}
+                    >
+                      CONTACT
+                    </motion.div>
+                  </motion.a>
+                </div>
               </div>
             </div>
             <div className="flex justify-end">
-              <h1 className="font-helvetica text-[#d9d9d9] text-4xl tracking-tight">
-                // A group of creative thinkers making things <br /> smarter,
-                newer and more memorable.
+              <h1 className="font-helvetica text-[#d9d9d9] text-4xl tracking-tight lg:w-1/3">
+                // A group of creative thinkers making things smarter, newer and
+                more memorable.
               </h1>
             </div>
             <div className="flex gap-4 ">
@@ -336,7 +336,10 @@ function App() {
               </div>
             </div>
           </section>
-          <section className="text-white h-[3100px] box-border lg:px-[40px] p-[20px]">
+          <section
+            id="services"
+            className="text-white h-[3200px] box-border lg:px-[40px] lg:p-[40px] px-8"
+          >
             <section className="flex flex-col pb-10">
               <div className="">
                 <div className="lg:w-3/4 w-full">
@@ -546,9 +549,7 @@ function App() {
               </section>
             </section>
           </section>
-          <div id="works" className="">
-            <Works />
-          </div>
+          <Works id="works" />
           <section
             className="h-screen relative flex flex-col gap-16 lg:gap-24 lg:px-[80px]"
             id="contact"

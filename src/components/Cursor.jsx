@@ -1,25 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
+import { gsap } from "gsap"; // Make sure to add your CSS styles
 
-const Cursor = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+const CustomCursor = () => {
+  const cursorRef = useRef(null);
 
   useEffect(() => {
-    const handleMouseMove = (event) => {
-      setPosition({ x: event.clientX, y: event.clientY });
+    const handleMouseMove = (e) => {
+      const { clientX, clientY } = e;
+      gsap.to(cursorRef.current, {
+        x: clientX,
+        y: clientY,
+        duration: 0.1,
+        ease: "power3.out",
+      });
     };
 
     document.addEventListener("mousemove", handleMouseMove);
+
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
-  return (
-    <div
-      className="fixed pointer-events-none w-4 h-4 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2 z-50"
-      style={{ left: `${position.x}px`, top: `${position.y}px` }}
-    />
-  );
+  return <div ref={cursorRef} className="custom-cursor" />;
 };
 
-export default Cursor;
+export default CustomCursor;

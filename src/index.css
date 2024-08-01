@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -61,4 +61,17 @@ html.lenis body {
   height: 1rem;
   width: 0.1rem;
   background-color: white;
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  pointer-events: none; /* Ensure the cursor doesn't block mouse events */
+  z-index: 9999; /* Ensure the cursor is above all other elements */
+  transform: translate(-50%, -50%); /* Center the cursor */
 }

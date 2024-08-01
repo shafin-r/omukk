@@ -26,7 +26,7 @@ export default function Link({ data, isActive, setSelectedIndicator }) {
         whileHover={{
           translateX: "30px",
         }}
-        className="font-Inter font-bold tracking-tighter text-7xl"
+        className="font-Inter font-bold tracking-tighter text-5xl lg:text-7xl"
         href={href}
       >
         {title}

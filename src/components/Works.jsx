@@ -1,120 +1,146 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { gsap } from "gsap";
 import { Draggable } from "gsap/Draggable";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import { motion } from "framer-motion";
 import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(Draggable);
+gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(useGSAP);
 
+const scaleAnimation = {
+  initial: { scale: 0, x: "-50%", y: "-50%" },
+
+  enter: {
+    scale: 1,
+    x: "-50%",
+    y: "-50%",
+    transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] },
+  },
+
+  closed: {
+    scale: 0,
+    x: "-50%",
+    y: "-50%",
+    transition: { duration: 0.4, ease: [0.32, 0, 0.67, 0] },
+  },
+};
+
 const Works = () => {
+  const workCountRef = useRef(null);
+  const cursor = useRef(null);
+  const [pointer, setPointer] = useState({ active: false });
+  const { active } = pointer;
+
   useGSAP(() => {
-    const timeline = document.querySelector("#timeline");
-    const scroller = document.querySelector("#scroller");
-    const container = document.querySelector("#gallery__container");
-    const timelineWidth = timeline.offsetWidth;
-    const scrollerWidth = scroller.offsetWidth;
-    const gap = parseInt(window.getComputedStyle(document.body).fontSize);
-
-    const maxDragX = timelineWidth - scrollerWidth - 2 * gap;
-
-    for (let i = 0; i < 15; i++) {
-      const marker = document.createElement("div");
-      marker.classList.add("marker");
-      timeline.appendChild(marker);
-    }
-
-    Draggable.create(scroller, {
-      type: "x",
-      bounds: {
-        minX: gap,
-        maxX: timelineWidth - scrollerWidth - gap,
-      },
-      onDrag: function () {
-        let progress = (this.x - gap) / maxDragX;
-        let containerX = -400 * (timelineWidth / 100) * progress;
-        gsap.to(container, {
-          x: containerX,
-          duration: 1,
-          ease: "power2.out",
-        });
+    gsap.to(workCountRef.current, {
+      scrollTrigger: {
+        trigger: workCountRef.current,
+        start: "top 20%",
+        end: "+=1220px",
+        scrub: true,
+        pin: true,
+        anticipatePin: 1,
+        pinSpacing: false,
       },
     });
   });
-
   return (
     <section
-      className="relative flex flex-col items-start h-screen px-[60px] overflow-hidden"
+      className="h-auto flex flex-col lg:gap-32 gap-10 lg:px-[50px] px-8 py-10"
       id="works"
     >
-      <div className="flex w-full">
-        <h1 className="font-helvetica tracking-tighter text-[100px] text-[#d9d9d9] ">
-          SELECTED WORKS /
-        </h1>
-      </div>
-      <div className="flex w-full ">
-        <div className="w-1/2 "></div>
-        <div className="w-1/2 flex justify-evenly ">
-          <h3 className="font-jetbrain tracking-tighter text-xl text-[#d9d9d9]">
+      <section className="flex w-full">
+        <div className=" text-[#d9d9d9]">
+          <h1 className="font-helvetica  tracking-tighter lg:text-[160px] text-[55px] leading-[1.1em]">
+            SELECTED WORKS /{" "}
+            <span className="text-4xl lg:text-7xl tracking-widest">(2)</span>
+          </h1>{" "}
+        </div>
+      </section>
+      <section className="flex lg:flex-row flex-col w-full border-b-[1px] border-[#eee]/40 pb-10 ">
+        <div className="lg:w-1/2 "></div>
+        <div className="lg:w-1/2 flex lg:flex-row flex-col justify-evenly gap-4 lg:gap-0 ">
+          <h3 className="font-jetbrain tracking-tighter lg:text-2xl text-xl text-[#d9d9d9]/60">
             (PROJECTS)
           </h3>
-          <p className="font-helvetica tracking-tight text-xl text-[#d9d9d9] w-1/2">
+          <p className="font-helvetica tracking-tight lg:text-3xl text-xl text-[#d9d9d9] lg:w-1/2">
             Here are some of our projects where we have extolled our utmost
             passion and creativitiy onto.
           </p>
         </div>
-      </div>
-      <div className="w-full h-[67vh] flex gap-20 py-6" id="gallery__container">
-        <section className="flex gap-20">
-          <section className="relative h-full flex gap-[2rem]" id="project1">
-            <h1 className="font-helvetica text-[#d9d9d9] tracking-tighter text-7xl text-nowrap">
-              Rota Egypt
-            </h1>
-          </section>
-          <section id="img1" className="relative w-[60vw] ">
-            <img
-              src="/rota-egpyt.png"
-              alt=""
-              className="w-full h-full object-cover"
-            />
-          </section>
-        </section>
-        <section className="flex gap-20">
-          <section className="relative h-full flex gap-[2rem]" id="project1">
-            <h1 className="font-helvetica text-[#d9d9d9] tracking-tighter text-7xl text-nowrap">
-              Rota Germany
-            </h1>
-          </section>
-          <section id="img1" className="relative w-[60vw] ">
-            <img
-              src="/rota-germany.png"
-              alt=""
-              className="w-full h-full object-cover"
-            />
-          </section>
-        </section>
-      </div>
-      <div
-        id="timeline"
-        className="absolute bottom-10 left-0 w-full flex justify-around px-10"
-      >
-        <div className="marker"></div>
-        <div
-          id="scroller"
-          className="absolute top-[50%] left-0 translate-x-[0%] -translate-y-[50%] cursor-pointer flex items-center "
+      </section>
+      <section className="flex my-6">
+        <h1
+          ref={workCountRef}
+          className="hidden lg:block font-helvetica text-[450px] text-[#d9d9d9] leading-[10rem]"
         >
-          <p className="group text-[#d9d9d9] font-jetbrain flex items-center bg-[#0b0b0b] text-xl">
-            <span className="group-hover:-translate-x-2 group-hover:scale-110 transition duration-300 ease-in-out">
-              [
-            </span>
-            <span className="font-jetbrain tracking-tighter text-[#d9d9d9] py-0 px-[2rem] ">
-              Drag
-            </span>
-            <span className="group-hover:translate-x-2 group-hover:scale-110  transition duration-300 ease-in-out">
-              ]
-            </span>
-          </p>
+          01.
+        </h1>
+        <div className="lg:pl-10 flex flex-col gap-20 lg:w-[64vw] justify-center lg:items-center z-10">
+          <section
+            onMouseEnter={() => setPointer({ active: true })}
+            onMouseLeave={() => setPointer({ active: false })}
+            className="flex flex-col gap-6 cursor-pointer"
+          >
+            <div className="">
+              <img src="/rota-egpyt.png" alt="" className="" />
+            </div>
+            <div className="flex lg:flex-row flex-col lg:gap-0 gap-4 justify-between lg:items-center">
+              <h1 className="font-helvetica text-[#d9d9d9] tracking-tighter lg:text-6xl text-4xl">
+                Rota Egypt
+              </h1>
+              <div className="flex gap-4">
+                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-4 py-1 rounded-full text-sm lg:text-lg">
+                  DESIGN
+                </h3>
+                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-4 py-1 rounded-full text-sm lg:text-lg">
+                  DEVELOPMENT
+                </h3>
+                <h3 className="text-[#0b0b0b] bg-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-4 py-1 rounded-full text-sm lg:text-lg">
+                  2023
+                </h3>
+              </div>
+            </div>
+          </section>
+          <section
+            onMouseEnter={() => setPointer({ active: true })}
+            onMouseLeave={() => setPointer({ active: false })}
+            className="flex flex-col gap-6 cursor-pointer"
+          >
+            <div className="">
+              <img src="/rota-germany.png" alt="" className="" />
+            </div>
+            <div className="flex lg:flex-row flex-col lg:gap-0 gap-4 justify-between lg:items-center">
+              <h1 className="font-helvetica text-[#d9d9d9] tracking-tighter lg:text-6xl text-4xl">
+                Rota Germany
+              </h1>
+              <div className="flex gap-4">
+                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-4 py-1 rounded-full text-sm lg:text-lg">
+                  DESIGN
+                </h3>
+                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-4 py-1 rounded-full text-sm lg:text-lg">
+                  DEVELOPMENT
+                </h3>
+                <h3 className="text-[#0b0b0b] bg-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-4 py-1 rounded-full text-sm lg:text-lg">
+                  2022
+                </h3>
+              </div>
+            </div>
+          </section>
         </div>
-      </div>
+      </section>
+      <motion.div
+        ref={cursor}
+        variants={scaleAnimation}
+        initial="initial"
+        animate={active ? "enter" : "closed"}
+        className="h-12 w-28 bg-white text-black flex justify-center items-center rounded-2xl font-jetbrain cursor-pointer"
+      >
+        View
+      </motion.div>
     </section>
   );
 };
