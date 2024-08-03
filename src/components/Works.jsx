@@ -29,23 +29,57 @@ const scaleAnimation = {
 };
 
 const Works = () => {
+  const sectionsRef = useRef([]);
+  const numberRef = useRef(null);
   const workCountRef = useRef(null);
   const cursor = useRef(null);
   const [pointer, setPointer] = useState({ active: false });
   const { active } = pointer;
 
   useGSAP(() => {
-    gsap.to(workCountRef.current, {
+    gsap.to(numberRef.current, {
       scrollTrigger: {
-        trigger: workCountRef.current,
+        trigger: numberRef.current,
         start: "top 20%",
-        end: "+=1220px",
+        end: "+=1000px",
         scrub: true,
         pin: true,
         anticipatePin: 1,
         pinSpacing: false,
       },
     });
+    gsap.utils.toArray(sectionsRef.current).forEach((section, index) => {
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top 20%",
+        end: "bottom center",
+        onEnter: () => slideNumber(index + 1),
+        onEnterBack: () => slideNumber(index + 1),
+        onLeave: () =>
+          slideNumber(Math.min(index + 2, sectionsRef.current.length)),
+        onLeaveBack: () => slideNumber(Math.max(index, 1)),
+      });
+    });
+    const slideNumber = (num) => {
+      gsap
+        .timeline()
+        .to(numberRef.current, {
+          y: 20, // Slide up or down
+          opacity: 0,
+          duration: 0.3,
+          ease: "power1.inOut",
+          onComplete: () => {
+            numberRef.current.innerText = num.toString().padStart(2, "0");
+            gsap.set(numberRef.current, { y: 0 });
+          },
+        })
+        .to(numberRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 0.3,
+          ease: "power1.inOut",
+        });
+    };
   });
   return (
     <section
@@ -72,34 +106,33 @@ const Works = () => {
           </p>
         </div>
       </section>
-      <section className="flex my-6">
+      <section className="flex justify-between my-6 w-full">
         <h1
-          ref={workCountRef}
-          className="hidden lg:block font-helvetica text-[450px] text-[#d9d9d9] leading-[10rem]"
-        >
-          01.
-        </h1>
-        <div className="lg:pl-10 flex flex-col gap-20 lg:w-[64vw] justify-center lg:items-center z-10">
+          ref={numberRef}
+          className="hidden lg:block font-helvetica text-[25em] h-fit text-[#d9d9d9] tracking-tighter leading-[10rem]"
+        ></h1>
+        <div className="lg:pl-10 flex flex-col lg:gap-48 gap-20 lg:w-[61vw] w-full justify-center lg:items-center z-10">
           <section
             onMouseEnter={() => setPointer({ active: true })}
             onMouseLeave={() => setPointer({ active: false })}
+            ref={(el) => (sectionsRef.current[0] = el)}
             className="flex flex-col gap-6 cursor-pointer"
           >
-            <div className="">
+            <a href="https://www.rotaegypt.com" className="">
               <img src="/rota-egpyt.png" alt="" className="" />
-            </div>
-            <div className="flex lg:flex-row flex-col lg:gap-0 gap-4 justify-between lg:items-center">
+            </a>
+            <div className="flex lg:flex-row flex-col lg:gap-0 gap-4 justify-between lg:items-center ">
               <h1 className="font-helvetica text-[#d9d9d9] tracking-tighter lg:text-6xl text-4xl">
                 Rota Egypt
               </h1>
-              <div className="flex gap-4">
-                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-4 py-1 rounded-full text-sm lg:text-lg">
+              <div className="flex gap-3">
+                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-3 py-1 rounded-full text-[0.1rem] lg:text-lg">
                   DESIGN
                 </h3>
-                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-4 py-1 rounded-full text-sm lg:text-lg">
+                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-3 py-1 rounded-full text-[0.1rem] lg:text-lg">
                   DEVELOPMENT
                 </h3>
-                <h3 className="text-[#0b0b0b] bg-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-4 py-1 rounded-full text-sm lg:text-lg">
+                <h3 className="text-[#0b0b0b] bg-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-3 py-1 rounded-full text-[0.1rem] lg:text-lg">
                   2023
                 </h3>
               </div>
@@ -108,20 +141,21 @@ const Works = () => {
           <section
             onMouseEnter={() => setPointer({ active: true })}
             onMouseLeave={() => setPointer({ active: false })}
+            ref={(el) => (sectionsRef.current[1] = el)}
             className="flex flex-col gap-6 cursor-pointer"
           >
-            <div className="">
+            <a href="https://www.rotagermany.com" className="">
               <img src="/rota-germany.png" alt="" className="" />
-            </div>
+            </a>
             <div className="flex lg:flex-row flex-col lg:gap-0 gap-4 justify-between lg:items-center">
               <h1 className="font-helvetica text-[#d9d9d9] tracking-tighter lg:text-6xl text-4xl">
                 Rota Germany
               </h1>
-              <div className="flex gap-4">
-                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-4 py-1 rounded-full text-sm lg:text-lg">
+              <div className="flex gap-3">
+                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-3 py-1 rounded-full text-sm lg:text-lg">
                   DESIGN
                 </h3>
-                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-4 py-1 rounded-full text-sm lg:text-lg">
+                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-3 py-1 rounded-full text-sm lg:text-lg">
                   DEVELOPMENT
                 </h3>
                 <h3 className="text-[#0b0b0b] bg-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-4 py-1 rounded-full text-sm lg:text-lg">
@@ -132,7 +166,7 @@ const Works = () => {
           </section>
         </div>
       </section>
-      <motion.div
+      {/* <motion.div
         ref={cursor}
         variants={scaleAnimation}
         initial="initial"
@@ -140,7 +174,7 @@ const Works = () => {
         className="h-12 w-28 bg-white text-black flex justify-center items-center rounded-2xl font-jetbrain cursor-pointer"
       >
         View
-      </motion.div>
+      </motion.div> */}
     </section>
   );
 };
