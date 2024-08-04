@@ -19,6 +19,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Preloader from "./components/Preloader";
 gsap.registerPlugin(ScrollTrigger);
+
 function App() {
   const [loading, setLoading] = useState(true);
   const [circlePos, setCirclePos] = useState({ top: "50%", left: "50%" });
@@ -125,7 +126,7 @@ function App() {
           end: "+=400px",
           scrub: 1,
         },
-        y: 250,
+        y: 450,
         x: -10,
         duration: 5,
         ease: "sine.inOut",
@@ -188,11 +189,11 @@ function App() {
             }}
             className="lg:scale-0 fixed right-0 top-0 lg:right-10 m-[20px] z-[10000] flex items-center justify-center"
           >
-            <div className="w-[70px] h-[70px] bg-[#525252] rounded-full cursor-pointer">
+            <div className="w-[80px] h-[80px] bg-[#525252] rounded-full cursor-pointer">
               <div
-                className={`w-full before:block before:h-[1px] before:w-[40%] before:m-auto before:bg-white before:relative before:transition before:duration-300 after:block after:h-[1px] after:w-[40%] after:m-auto after:bg-white after:relative after:transition after:duration-300 before:top-[30px] after:top-[35px] ${
+                className={`w-full before:block before:h-[2px] before:w-[60%] before:m-auto before:bg-white before:relative before:transition before:duration-300 after:block after:h-[2px] after:w-[60%] after:m-auto after:bg-white after:relative after:transition after:duration-300 before:top-[35px] after:top-[40px] ${
                   isActive
-                    ? "after:rotate-45 after:top-[1px] before:-rotate-45 before:top-[37px] cursor-pointer rounded-full"
+                    ? "after:rotate-45 before:-rotate-45 before:left-0 before:top-9 after:left-0 after:top-9 cursor-pointer"
                     : ""
                 }`}
               ></div>
@@ -202,13 +203,13 @@ function App() {
             </AnimatePresence>
           </div>
           <div>
-            <section className="h-screen flex flex-col justify-between items-center lg:items-stretch z-10 lg:p-[40px] p-8">
+            <section className="h-screen flex flex-col lg:justify-between justify-center items-center lg:items-stretch z-10 lg:p-[40px] p-8">
               <div className="flex flex-row items-center lg:items-start justify-between text-xl lg:text-md gap-2 lg:gap-0 w-full">
                 <div className="lg:hidden block">
                   <img
                     src="/logo-icon-white.svg"
                     alt=""
-                    className="h-20 w-20"
+                    className="lg:h-20 lg:w-20 h-80 w-80"
                   />
                 </div>
                 <div className="hidden lg:flex lg:flex-row flex-col items-end lg:items-start justify-between text-xl lg:text-md gap-2 lg:gap-0 w-full">
@@ -317,7 +318,7 @@ function App() {
                 </div>
               </div>
               <div className="flex justify-end">
-                <h1 className="font-helvetica text-[#d9d9d9] text-4xl tracking-tight lg:w-1/3">
+                <h1 className="lg:block hidden font-helvetica text-[#d9d9d9] text-4xl tracking-tight lg:w-1/3">
                   // A group of creative thinkers making things smarter, newer
                   and more memorable.
                 </h1>
