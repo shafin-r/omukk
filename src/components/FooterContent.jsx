@@ -18,23 +18,6 @@ const NavMenu = () => {
   );
 };
 
-const TextScroll = ({ text, slider }) => {
-  return (
-    <div className="absolute bottom-0">
-      <div className="scroll-text relative flex items-center gap-4 whitespace-nowrap">
-        <img src="/logo-icon-black.svg" alt="" className="h-[75px] w-[75px]" />
-        <h1 className=" relative m-0 text-[100px] tracking-tighter font-medium ">
-          OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK
-          OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK
-          OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK
-          OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK
-          OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK OMUKK
-        </h1>
-      </div>
-    </div>
-  );
-};
-
 const Nav = () => {
   return (
     <div className="flex flex-col lg:flex-row gap-8 lg:gap-0 w-full">

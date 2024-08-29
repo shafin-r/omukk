@@ -1,5 +1,7 @@
 // SVG imports
-import { HiArrowLongRight } from "react-icons/hi2";
+import { HiArrowLongRight, HiGlobeAmericas } from "react-icons/hi2";
+import { HiTerminal } from "react-icons/hi";
+
 
 // Third Party imports
 import { useEffect, useState } from "react";
@@ -17,7 +19,8 @@ import Works from "./components/Works";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Preloader from "./components/Preloader";
+import { MdMonitor } from "react-icons/md";
+import { BiMobile } from "react-icons/bi";
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
@@ -35,21 +38,6 @@ function App() {
 
   const about =
     "Omukk is a Bangladesh-based technology solution team dedicated to help startups and businesses to grow their impacts. Besides contact-based works, Omukk has its own projects that are constantly tested and upgraded for better uses.";
-
-  const works = [
-    {
-      title: "Rota Egypt",
-      src: "/rota-egpyt.png",
-      contribution: "Design & Web Development",
-      color: "#EFE8D3",
-    },
-    {
-      title: "Rota Germany",
-      src: "/rota-germany.png",
-      contribution: "Design & Web Development",
-      color: "#706D63",
-    },
-  ];
 
   const handleMouseMove = (e) => {
     const { clientX, clientY } = e;
@@ -123,10 +111,22 @@ function App() {
         scrollTrigger: {
           trigger: logoRef.current,
           start: "30% 50%",
-          end: "+=400px",
+          end: () => {
+            // Calculate the end value based on screen size
+            const screenHeight = window.innerHeight;
+            return `+=${screenHeight * 0.9}px`; // For example, half of the screen height
+          },
           scrub: 1,
         },
-        y: 450,
+        y: () => {
+          const screenHeight = window.innerHeight;
+          if (screenHeight < 900) {
+            return screenHeight * 0.5
+          }
+          else {
+            return screenHeight * 0.5
+          }
+        },
         x: -10,
         duration: 5,
         ease: "sine.inOut",
@@ -204,10 +204,10 @@ function App() {
           </div>
           <div>
             <section className="h-screen flex flex-col lg:justify-between justify-center items-center lg:items-stretch z-10 lg:p-[40px] p-8">
-              <div className="flex flex-row items-center lg:items-start justify-between text-xl lg:text-md gap-2 lg:gap-0 w-full">
-                <div className="lg:hidden block">
+              <div className="flex flex-row items-center lg:items-start lg:justify-between justify-center text-xl lg:text-md gap-2 lg:gap-0 w-full">
+                <div className=" lg:hidden block">
                   <img
-                    src="/logo-icon-white.svg"
+                    src="/logo/logo-icon-white.svg"
                     alt=""
                     className="lg:h-20 lg:w-20 h-80 w-80"
                   />
@@ -379,8 +379,9 @@ function App() {
                   className="h-[50em] lg:h-[600px] flex flex-col gap-6 border-t-[1px] border-[#eee]/40 w-full bg-[#0b0b0b] pt-4"
                 >
                   <div className="flex justify-between items-center">
-                    <h1 className="font-Inter font-semibold tracking-tighter text-5xl">
+                    <h1 className="w-full flex justify-between font-Inter font-semibold tracking-tighter text-5xl">
                       Web
+                      <HiGlobeAmericas />
                     </h1>
                   </div>
                   <div className="flex flex-col gap-10 lg:gap-0 lg:flex-row w-full">
@@ -426,8 +427,9 @@ function App() {
                   className="desktop-section h-[50em] lg:h-[600px] flex flex-col gap-6 border-t-[1px] border-[#eee]/40 bg-[#0b0b0b] pt-4"
                 >
                   <div className="flex justify-between items-center">
-                    <h1 className="font-Inter font-semibold tracking-tighter text-5xl">
+                    <h1 className=" flex w-full justify-between font-Inter font-semibold tracking-tighter text-5xl">
                       Desktop
+                      <MdMonitor />
                     </h1>
                   </div>
                   <div className="flex flex-col gap-10 lg:gap-0 lg:flex-row w-full">
@@ -474,8 +476,9 @@ function App() {
                   className="mobile-section h-[50em] lg:h-[600px] flex flex-col gap-6 border-t-[1px] border-[#eee]/40 bg-[#0b0b0b] pt-4"
                 >
                   <div className="flex justify-between items-center">
-                    <h1 className="font-Inter font-semibold tracking-tighter text-5xl">
+                    <h1 className="w-full flex justify-between font-Inter font-semibold tracking-tighter text-5xl">
                       Mobile
+                      <BiMobile />
                     </h1>
                   </div>
                   <div className="flex flex-col gap-10 lg:gap-0 lg:flex-row w-full">
@@ -523,8 +526,9 @@ function App() {
                   className="h-[50em] lg:h-[600px] flex flex-col gap-6 border-t-[1px] border-[#eee]/40 bg-[#0b0b0b] pt-4"
                 >
                   <div className="flex justify-between items-center">
-                    <h1 className="font-Inter font-semibold tracking-tighter text-5xl">
+                    <h1 className="w-full flex justify-between font-Inter font-semibold tracking-tighter text-5xl">
                       DevOps
+                      <HiTerminal />
                     </h1>
                   </div>
                   <div className="flex flex-col gap-10 lg:gap-0 lg:flex-row w-full">
@@ -576,7 +580,7 @@ function App() {
               <div className="lg:h-3/4">
                 <div className=" py-8 flex items-center justify-center lg:justify-start">
                   <img
-                    src="/logo-icon-white.svg"
+                    src="/logo/logo-icon-white.svg"
                     alt=""
                     className="h-10 w-10"
                   />

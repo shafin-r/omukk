@@ -121,19 +121,19 @@ const Works = () => {
             <a href="https://www.rotaegypt.com" className="">
               <img src="/rota-egpyt.png" alt="" className="" />
             </a>
-            <div className="flex lg:flex-row flex-col lg:gap-0 gap-4 justify-between lg:items-center ">
+            <div className="flex lg:flex-row flex-col lg:gap-0 gap-4 justify-between lg:items-center">
               <h1 className="font-helvetica text-[#d9d9d9] tracking-tighter lg:text-6xl text-4xl">
                 Rota Egypt
               </h1>
               <div className="flex gap-3">
-                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-3 py-1 rounded-full text-[0.1rem] lg:text-lg">
+                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-3 py-1 rounded-full text-sm lg:text-lg">
                   DESIGN
                 </h3>
-                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-3 py-1 rounded-full text-[0.1rem] lg:text-lg">
+                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-3 py-1 rounded-full text-sm lg:text-lg">
                   DEVELOPMENT
                 </h3>
-                <h3 className="text-[#0b0b0b] bg-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-3 py-1 rounded-full text-[0.1rem] lg:text-lg">
-                  2023
+                <h3 className="text-[#0b0b0b] bg-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-4 py-1 rounded-full text-sm lg:text-lg">
+                  2022
                 </h3>
               </div>
             </div>
