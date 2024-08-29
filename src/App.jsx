@@ -14,6 +14,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Footer from "./components/Footer";
 import NavBar from "./components/NavBar";
 import Works from "./components/Works";
+import Preloader from "./components/Preloader";
 
 // GSAP Import
 import gsap from "gsap";
@@ -24,7 +25,6 @@ import { BiMobile } from "react-icons/bi";
 gsap.registerPlugin(ScrollTrigger);
 
 function App() {
-  const [loading, setLoading] = useState(true);
   const [circlePos, setCirclePos] = useState({ top: "50%", left: "50%" });
   const [isActive, setIsActive] = useState(null);
   const webRef = useRef(null);
@@ -326,7 +326,7 @@ function App() {
               <div className="flex gap-4 ">
                 <h1
                   ref={logoRef}
-                  className="font-helvetica text-[#d9d9d9] text-[5em] lg:text-[350px] tracking-tighter z-50 font-normal"
+                  className="font-Inter text-[#d9d9d9] text-[5em] lg:text-[350px] tracking-tighter z-50"
                 >
                   OMUKK
                 </h1>
@@ -599,7 +599,7 @@ function App() {
             </section>
           </div>
         </div>
-      </div>
+      </div>)
     </ReactLenis>
   );
 }

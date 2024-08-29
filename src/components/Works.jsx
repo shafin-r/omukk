@@ -31,17 +31,17 @@ const scaleAnimation = {
 const Works = () => {
   const sectionsRef = useRef([]);
   const numberRef = useRef(null);
-  const workCountRef = useRef(null);
-  const cursor = useRef(null);
   const [pointer, setPointer] = useState({ active: false });
-  const { active } = pointer;
 
   useGSAP(() => {
     gsap.to(numberRef.current, {
       scrollTrigger: {
         trigger: numberRef.current,
         start: "top 20%",
-        end: "+=1000px",
+        end: () => {
+          const scrollHeight = window.innerHeight;
+          return `+=${scrollHeight * 2}`
+        },
         scrub: true,
         pin: true,
         anticipatePin: 1,
@@ -118,8 +118,8 @@ const Works = () => {
             ref={(el) => (sectionsRef.current[0] = el)}
             className="flex flex-col gap-6 cursor-pointer"
           >
-            <a href="https://www.rotaegypt.com" className="">
-              <img src="/rota-egpyt.png" alt="" className="" />
+            <a href="https://www.rotaegypt.com" target="_blank" className="">
+              <img src="/projects/rota-egpyt.png" alt="" className="" />
             </a>
             <div className="flex lg:flex-row flex-col lg:gap-0 gap-4 justify-between lg:items-center">
               <h1 className="font-helvetica text-[#d9d9d9] tracking-tighter lg:text-6xl text-4xl">
@@ -144,8 +144,8 @@ const Works = () => {
             ref={(el) => (sectionsRef.current[1] = el)}
             className="flex flex-col gap-6 cursor-pointer"
           >
-            <a href="https://www.rotagermany.com" className="">
-              <img src="/rota-germany.png" alt="" className="" />
+            <a href="https://www.rotagermany.com" target="_blank"  className="">
+              <img src="/projects/rota-germany.png" alt="" className="" />
             </a>
             <div className="flex lg:flex-row flex-col lg:gap-0 gap-4 justify-between lg:items-center">
               <h1 className="font-helvetica text-[#d9d9d9] tracking-tighter lg:text-6xl text-4xl">
@@ -159,7 +159,33 @@ const Works = () => {
                   DEVELOPMENT
                 </h3>
                 <h3 className="text-[#0b0b0b] bg-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-4 py-1 rounded-full text-sm lg:text-lg">
-                  2022
+                  2023
+                </h3>
+              </div>
+            </div>
+          </section>
+          <section
+            onMouseEnter={() => setPointer({ active: true })}
+            onMouseLeave={() => setPointer({ active: false })}
+            ref={(el) => (sectionsRef.current[2] = el)}
+            className="flex flex-col gap-6 cursor-pointer"
+          >
+            <a href="https://htsociety.org/" target="_blank"  className="">
+              <img src="/projects/hts.png" alt="" className="" />
+            </a>
+            <div className="flex lg:flex-row flex-col lg:gap-0 gap-4 justify-between lg:items-center">
+              <h1 className="font-helvetica text-[#d9d9d9] tracking-tighter lg:text-5xl text-2xl">
+                Historical Transparency Society
+              </h1>
+              <div className="flex gap-3">
+                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-3 py-1 rounded-full text-sm lg:text-lg">
+                  DESIGN
+                </h3>
+                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-3 py-1 rounded-full text-sm lg:text-lg">
+                  DEVELOPMENT
+                </h3>
+                <h3 className="text-[#0b0b0b] bg-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-4 py-1 rounded-full text-sm lg:text-lg">
+                  2024
                 </h3>
               </div>
             </div>
