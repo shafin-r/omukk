@@ -76,7 +76,6 @@ function App() {
         },
         scrub: true,
         pin: true,
-        markers: true,
         anticipatePin: 1,
         pinSpacing: false,
       });
@@ -89,7 +88,6 @@ function App() {
         },
         scrub: true,
         pin: true,
-        markers: true,
         anticipatePin: 1,
         pinSpacing: false,
       });
@@ -101,7 +99,6 @@ function App() {
           return `+=${screenHeight * 1.09}px`; // For example, half of the screen height
         },
         scrub: true,
-        markers: true,
         pin: true,
         anticipatePin: 1,
         pinSpacing: false,
@@ -114,7 +111,6 @@ function App() {
           return `+=${screenHeight * 0.54}px`; // For example, half of the screen height
         },
         scrub: true,
-        markers: true,
         pin: true,
         anticipatePin: 1,
         pinSpacing: false,
