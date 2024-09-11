@@ -2,7 +2,6 @@
 import { HiArrowLongRight, HiGlobeAmericas } from "react-icons/hi2";
 import { HiTerminal } from "react-icons/hi";
 
-
 // Third Party imports
 import { useEffect, useState } from "react";
 import { ReactLenis } from "lenis/react";
@@ -71,26 +70,38 @@ function App() {
       ScrollTrigger.create({
         trigger: webRef.current,
         start: "top 20%",
-        end: "+=2020px",
+        end: () => {
+          const screenHeight = window.innerHeight;
+          return `+=${screenHeight * 2.19}px`; // For example, half of the screen height
+        },
         scrub: true,
         pin: true,
+        markers: true,
         anticipatePin: 1,
         pinSpacing: false,
       });
       ScrollTrigger.create({
         trigger: desktopRef.current,
         start: "top 30%",
-        end: "+=1515px",
+        end: () => {
+          const screenHeight = window.innerHeight;
+          return `+=${screenHeight * 1.64}px`; // For example, half of the screen height
+        },
         scrub: true,
         pin: true,
+        markers: true,
         anticipatePin: 1,
         pinSpacing: false,
       });
       ScrollTrigger.create({
         trigger: mobileRef.current,
         start: "top 40%",
-        end: "+=1010px",
+        end: () => {
+          const screenHeight = window.innerHeight;
+          return `+=${screenHeight * 1.09}px`; // For example, half of the screen height
+        },
         scrub: true,
+        markers: true,
         pin: true,
         anticipatePin: 1,
         pinSpacing: false,
@@ -98,8 +109,12 @@ function App() {
       ScrollTrigger.create({
         trigger: devopsRef.current,
         start: "top 50%",
-        end: "+=505px",
+        end: () => {
+          const screenHeight = window.innerHeight;
+          return `+=${screenHeight * 0.54}px`; // For example, half of the screen height
+        },
         scrub: true,
+        markers: true,
         pin: true,
         anticipatePin: 1,
         pinSpacing: false,
@@ -121,10 +136,9 @@ function App() {
         y: () => {
           const screenHeight = window.innerHeight;
           if (screenHeight < 900) {
-            return screenHeight * 0.5
-          }
-          else {
-            return screenHeight * 0.5
+            return screenHeight * 0.5;
+          } else {
+            return screenHeight * 0.5;
           }
         },
         x: -10,
@@ -599,7 +613,7 @@ function App() {
             </section>
           </div>
         </div>
-      </div>)
+      </div>
     </ReactLenis>
   );
 }
