@@ -40,7 +40,7 @@ const Works = () => {
         start: "top 20%",
         end: () => {
           const scrollHeight = window.innerHeight;
-          return `+=${scrollHeight * 2}`
+          return `+=${scrollHeight * 3}`;
         },
         scrub: true,
         pin: true,
@@ -90,7 +90,7 @@ const Works = () => {
         <div className=" text-[#d9d9d9]">
           <h1 className="font-helvetica  tracking-tighter lg:text-[160px] text-[55px] leading-[1.1em]">
             SELECTED WORKS /{" "}
-            <span className="text-4xl lg:text-7xl tracking-widest">(2)</span>
+            <span className="text-4xl lg:text-7xl tracking-widest">(4)</span>
           </h1>{" "}
         </div>
       </section>
@@ -144,7 +144,7 @@ const Works = () => {
             ref={(el) => (sectionsRef.current[1] = el)}
             className="flex flex-col gap-6 cursor-pointer"
           >
-            <a href="https://www.rotagermany.com" target="_blank"  className="">
+            <a href="https://www.rotagermany.com" target="_blank" className="">
               <img src="/projects/rota-germany.png" alt="" className="" />
             </a>
             <div className="flex lg:flex-row flex-col lg:gap-0 gap-4 justify-between lg:items-center">
@@ -170,7 +170,7 @@ const Works = () => {
             ref={(el) => (sectionsRef.current[2] = el)}
             className="flex flex-col gap-6 cursor-pointer"
           >
-            <a href="https://htsociety.org/" target="_blank"  className="">
+            <a href="https://htsociety.org/" target="_blank" className="">
               <img src="/projects/hts.png" alt="" className="" />
             </a>
             <div className="flex lg:flex-row flex-col lg:gap-0 gap-4 justify-between lg:items-center">
@@ -186,6 +186,32 @@ const Works = () => {
                 </h3>
                 <h3 className="text-[#0b0b0b] bg-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-4 py-1 rounded-full text-sm lg:text-lg">
                   2024
+                </h3>
+              </div>
+            </div>
+          </section>
+          <section
+            onMouseEnter={() => setPointer({ active: true })}
+            onMouseLeave={() => setPointer({ active: false })}
+            ref={(el) => (sectionsRef.current[3] = el)}
+            className="flex flex-col gap-6 cursor-pointer"
+          >
+            <a href="https://examjam.app/" target="_blank" className="">
+              <img src="/projects/promo.png" alt="" className="" />
+            </a>
+            <div className="flex lg:flex-row flex-col lg:gap-0 gap-4 justify-between lg:items-center">
+              <h1 className="font-helvetica text-[#d9d9d9] tracking-tighter lg:text-5xl text-2xl">
+                ExamJam
+              </h1>
+              <div className="flex gap-3">
+                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-3 py-1 rounded-full text-sm lg:text-lg">
+                  DESIGN
+                </h3>
+                <h3 className="text-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-3 py-1 rounded-full text-sm lg:text-lg">
+                  DEVELOPMENT
+                </h3>
+                <h3 className="text-[#0b0b0b] bg-[#d9d9d9] font-jetbrain ring-2 ring-[#d9d9d9] px-4 py-1 rounded-full text-sm lg:text-lg">
+                  2025
                 </h3>
               </div>
             </div>
