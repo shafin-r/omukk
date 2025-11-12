@@ -383,10 +383,10 @@ function App() {
                   </div>
                 </div>
               </section>
-              <section className="h-full box-border">
+              <section className="h-full box-border space-y-12 lg:space-y-0">
                 <section
                   ref={webRef}
-                  className="h-[50em] lg:h-[600px] flex flex-col gap-6 border-t-[1px] border-[#eee]/40 w-full bg-[#0b0b0b] pt-4"
+                  className="h-fit lg:h-[600px] flex flex-col gap-6 border-t-[1px] border-[#eee]/40 w-full bg-[#0b0b0b] pt-4"
                 >
                   <div className="flex justify-between items-center">
                     <h1 className="w-full flex justify-between font-Inter font-semibold tracking-tighter text-5xl">
@@ -398,9 +398,9 @@ function App() {
                     <div className="lg:w-1/2">
                       <p className="font-Inter text-xl tracking-tighter lg:w-2/3">
                         At Omukk, we transform your digital vision into reality
-                        with our cutting-edge web wdevelopment services. From
-                        sleek, responsive websites to powerful web aplpications,
-                        our team crafts seamless user experiences that cpativate
+                        with our cutting-edge web development services. From
+                        sleek, responsive websites to powerful web applications,
+                        our team crafts seamless user experiences that captivate
                         and convert.
                       </p>
                     </div>
@@ -434,7 +434,7 @@ function App() {
                 </section>
                 <section
                   ref={desktopRef}
-                  className="desktop-section h-[50em] lg:h-[600px] flex flex-col gap-6 border-t-[1px] border-[#eee]/40 bg-[#0b0b0b] pt-4"
+                  className="desktop-section h-fit lg:h-[600px] flex flex-col gap-6 border-t-[1px] border-[#eee]/40 bg-[#0b0b0b] pt-4"
                 >
                   <div className="flex justify-between items-center">
                     <h1 className=" flex w-full justify-between font-Inter font-semibold tracking-tighter text-5xl">
@@ -483,7 +483,7 @@ function App() {
                 </section>
                 <section
                   ref={mobileRef}
-                  className="mobile-section h-[50em] lg:h-[600px] flex flex-col gap-6 border-t-[1px] border-[#eee]/40 bg-[#0b0b0b] pt-4"
+                  className="mobile-section h-fit lg:h-[600px] flex flex-col gap-6 border-t-[1px] border-[#eee]/40 bg-[#0b0b0b] pt-4"
                 >
                   <div className="flex justify-between items-center">
                     <h1 className="w-full flex justify-between font-Inter font-semibold tracking-tighter text-5xl">
@@ -494,13 +494,13 @@ function App() {
                   <div className="flex flex-col gap-10 lg:gap-0 lg:flex-row w-full">
                     <div className="lg:w-1/2">
                       <p className="font-Inter text-xl tracking-tighter lg:w-2/3">
-                        Elevate your brand’s presence with our bespoke mobile
-                        development services. At Omukk, we design and develop
-                        intuitive and feature-rich mobile applications tailored
-                        to both iOS and Android platforms. Our solutions ensure
-                        that your app stands out in the crowded marketplace,
-                        providing users with exceptional functionality and a
-                        delightful experience.
+                        Elevate your brand&apos;s presence with our bespoke
+                        mobile development services. At Omukk, we design and
+                        develop intuitive and feature-rich mobile applications
+                        tailored to both iOS and Android platforms. Our
+                        solutions ensure that your app stands out in the crowded
+                        marketplace, providing users with exceptional
+                        functionality and a delightful experience.
                       </p>
                     </div>
                     <div className="lg:w-1/2 flex flex-col gap-6">
@@ -533,7 +533,7 @@ function App() {
                 </section>
                 <section
                   ref={devopsRef}
-                  className="h-[50em] lg:h-[600px] flex flex-col gap-6 border-t-[1px] border-[#eee]/40 bg-[#0b0b0b] pt-4"
+                  className="h-fit lg:h-[600px] flex flex-col gap-6 border-t-[1px] border-[#eee]/40 bg-[#0b0b0b] pt-4"
                 >
                   <div className="flex justify-between items-center">
                     <h1 className="w-full flex justify-between font-Inter font-semibold tracking-tighter text-5xl">
